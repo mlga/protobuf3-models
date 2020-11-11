@@ -44,7 +44,7 @@ class ModelMeta(type):
             raise RuntimeError("protobuf_message must be a subclass of Protobuf message")
 
         # TODO: Validate fields against protobuf message definition
-        attrs["protobuf_options"] = ModelOptions(
+        attrs["_model_options"] = ModelOptions(
             message_class=protobuf_message,
         )
 
@@ -71,10 +71,11 @@ class ModelMeta(type):
 
 class Model(metaclass=ModelMeta, protobuf_message=_Ignore):
     # pylint: disable=too-few-public-methods
-    __slots__ = ("_message", "_fields")
+    __slots__ = ("_message", "_fields", "_model_options")
 
     _message: Optional[Message]
     _fields: Dict[str, Field]
+    _model_options: ModelOptions
 
     @property
     def message(self) -> Message:
@@ -83,3 +84,7 @@ class Model(metaclass=ModelMeta, protobuf_message=_Ignore):
     @property
     def fields(self) -> Dict[str, Field]:
         return self._fields
+
+    @property
+    def model_options(self) -> ModelOptions:
+        return self._model_options
