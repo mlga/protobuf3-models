@@ -28,14 +28,14 @@ def _filter_fields(attrs: Dict[str, Any]) -> Iterator[Tuple[str, Field]]:
 
 class ModelMeta(type):
     def __new__(
-        mcs: Type["ModelMeta"],
+        mcs: Type[ModelMeta],
         name: str,
         bases: Tuple[Type],
         attrs: Dict[str, Any],
         protobuf_message: Union[None, Type[_Ignore], Type[Message]] = None,
     ) -> ModelMeta:
         if protobuf_message is _Ignore:
-            return cast("ModelMeta", super().__new__(mcs, name, bases, attrs))
+            return cast(ModelMeta, super().__new__(mcs, name, bases, attrs))
 
         if protobuf_message is None:
             raise RuntimeError(f"protobuf_message argument of class {name} must be set")
@@ -53,7 +53,7 @@ class ModelMeta(type):
 
         cls = super().__new__(mcs, name, bases, attrs)
 
-        return cast("ModelMeta", cls)
+        return cast(ModelMeta, cls)
 
     @staticmethod
     def _make_fields(attrs: Dict[str, Any]) -> None:
@@ -79,6 +79,9 @@ class Model(metaclass=ModelMeta, protobuf_message=_Ignore):
 
     @property
     def message(self) -> Message:
+        if self._message is None:
+            raise Exception("No message attached to model.")
+
         return self._message
 
     @property
