@@ -22,7 +22,7 @@ jobs:
     - name: Lint with pylint
       run: |
         pylint --rcfile=toolscfg/pylintrc protobuf3_models setup_commands tests
-    - name: Lint with pylint
+    - name: Typecheck with mypy
       run: |
         mypy --config-file toolscfg/mypy.ini
     - name: Test
