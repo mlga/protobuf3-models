@@ -39,6 +39,7 @@ setup(
     extras_require={
         "develop": [
             "isort~=5.6",
+            "mypy==0.790",
             "pre-commit~=2.8",
             "pylint~=2.3",
             "pytest~=6.1",

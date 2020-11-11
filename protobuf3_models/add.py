@@ -1,3 +1,3 @@
 # -*- coding:utf-8 -*-
-def add(a, b):  # pylint: disable=invalid-name
+def add(a: int, b: int) -> int:  # pylint: disable=invalid-name
     return a + b

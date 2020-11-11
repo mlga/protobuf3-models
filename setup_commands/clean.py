@@ -27,6 +27,7 @@ class CleanCommand(distutils.cmd.Command):
             ["rm", "-f", "report.xml"],
             ["rm", "-Rf", "build"],
             ["rm", "-Rf", "dist"],
+            ["rm", "-Rf", ".mypy_cache"],
         )
 
         for command in commands:

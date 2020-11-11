@@ -22,6 +22,9 @@ jobs:
     - name: Lint with pylint
       run: |
         pylint --rcfile=toolscfg/pylintrc protobuf3_models setup_commands tests
+    - name: Lint with pylint
+      run: |
+        mypy --config-file toolscfg/mypy.ini
     - name: Test
       run: |
         python setup.py pytest
