@@ -21,7 +21,7 @@ jobs:
         pip install .[develop]
     - name: Lint with pylint
       run: |
-        pylint --rcfile=toolscfg/pylintrc
+        pylint --rcfile=toolscfg/pylintrc protobuf3_models setup_commands tests
     - name: Test
       run: |
         python setup.py pytest
