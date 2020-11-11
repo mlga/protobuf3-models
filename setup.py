@@ -13,9 +13,32 @@ with open("README.md") as fh:
     README = fh.read()
 
 
+def scm_factory():
+    from setuptools_scm.version import get_no_local_node  # pylint: disable=import-outside-toplevel
+
+    def clean_scheme(version):
+        """ Do not add commit hash to version."""
+        return get_no_local_node(version)
+
+    def distance_dev_version(version):
+        """Do not try to guess and display next version number.
+
+        Only add distance from previous tag.
+        """
+        if version.exact:
+            return version.format_with("{tag}")
+
+        return version.format_with("{tag}.dev{distance}")
+
+    return {
+        "local_scheme": clean_scheme,
+        "version_scheme": distance_dev_version,
+    }
+
+
 setup(
     name="protobuf3-models",
-    use_scm_version=True,
+    use_scm_version=scm_factory,
     description="Straightforward protobuf 3 handling through Python classes.",
     long_description=README,
     long_description_content_type="text/markdown",

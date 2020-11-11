@@ -19,6 +19,7 @@ repos:
   hooks:
   - id: pylint
     args: [--rcfile=toolscfg/pylintrc]
+    language: system
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
   rev: v1.6.1
   hooks:
@@ -29,3 +30,4 @@ repos:
   hooks:
   - id: mypy
     args: [--config-file=toolscfg/mypy.ini]
+    language: system
