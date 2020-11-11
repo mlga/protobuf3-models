@@ -30,24 +30,24 @@ known_first_party = 'protobuf3_models'
 indent = '    '
 combine_as_imports = true
 
-[tool.pytest]
+[tool.pytest.ini_options]
 addopts = '--capture=no --verbose --html=htmltest/report.html --self-contained-html --junit-xml=report.xml --cov=. --cov-report=html --cov-report=xml'
 
-[coverage.run]
-omit = '''
-*/__init__.py
-setup.py
-*/tests/*
-*/.eggs/*
-setup_commands/*
-'''
+[tool.coverage.run]
+omit = [
+    '*/__init__.py',
+    'setup.py',
+    '*/tests/*',
+    '*/.eggs/*',
+    'setup_commands/*',
+]
 
-[coverage.report]
-exclude_lines = '''
-pragma: no cover
-raise AssertionError
-raise NotImplementedError
-return NotImplemented
-if 0:
-if __name__ == .__main__.:
-'''
+[tool.coverage.report]
+exclude_lines = [
+    'pragma: no cover',
+    'raise AssertionError',
+    'raise NotImplementedError',
+    'return NotImplemented',
+    'if 0:',
+    'if __name__ == .__main__.:',
+]
